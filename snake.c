@@ -128,6 +128,9 @@ int main() {
 
         // draw the game
         printf("\x1b[2J"); // clear the screen
+        
+        printf("\x1b[H");
+        printf("Score: %d", snake_len);
                            
         print_hunt(hunt_x,hunt_y);
 
