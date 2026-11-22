@@ -6,9 +6,11 @@
 #include <unistd.h>
 #include <termios.h>
 #include <sys/ioctl.h>
+#include <signal.h>
 
 static struct termios old_termios, new_termios;
 static struct winsize w;
+static int exit_loop;
 
 static void reset_terminal(void) {
     write(STDOUT_FILENO, "\x1b[?25h", 6);
@@ -38,4 +40,7 @@ static unsigned short get_term_row(void) {
     return w.ws_row;
 }
 
+static void signal_handler(__attribute__((unused)) int signum) {  
+    exit_loop = 1;
+}
 #endif

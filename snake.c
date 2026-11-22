@@ -26,6 +26,8 @@ void print_hunt(int hunt_x, int hunt_y){
 int main() {
 
     configure_terminal();
+    signal(SIGINT, signal_handler);
+
 
     int body_x[4096] = {0};
     int body_y[4096] = {0};
@@ -41,7 +43,7 @@ int main() {
     int hunt_y = get_term_row() / 2;
     
     //game loop
-    while(true){
+    while(!exit_loop){
 
         read(STDIN_FILENO, &buf,3);
         
